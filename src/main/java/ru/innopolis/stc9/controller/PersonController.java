@@ -38,10 +38,10 @@ public class PersonController extends HttpServlet {
     }
 
     @RequestMapping(value = "/deletePerson", method = RequestMethod.GET)
-    public String deletePerson(HttpServletRequest request,
-                               @RequestAttribute Person person, Model model) {
-        service.deleteById(person.getId());
-        return "/personList";
+    public void deletePerson(HttpServletRequest request,
+                               @RequestAttribute String id, Model model) {
+        service.deleteById(Long.parseLong(id));
+        getAll(request, model);
     }
 
     @RequestMapping(value = "/personAll", method = RequestMethod.GET)

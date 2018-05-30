@@ -17,12 +17,12 @@ public class PersonService {
     private static final Logger loggerError = Logger.getLogger(PersonService.class);
 
     @Autowired
-    private PersonDao studentDao;
+    private PersonDao personDao;
 
     public void updateById(Person person) {
         logger.info(this.getClass().getName() + " method updateById started, id = " + person.getId());
         try {
-            studentDao.update(person);
+            personDao.update(person);
         } catch (SQLException e) {
             loggerError.error("Error at method updateById, id = " + person.getId(), e);
         }
@@ -33,7 +33,7 @@ public class PersonService {
         logger.info(this.getClass().getName() + " method getById started, id = " + id);
         Person person = null;
         try {
-            person = studentDao.getById(id);
+            person = personDao.getById(id);
         } catch (SQLException e) {
             loggerError.error("Error at method getById, id = " + id, e);
         }
@@ -44,7 +44,7 @@ public class PersonService {
     public void deleteById(long id) {
         logger.info(this.getClass().getName() + " method deleteById started, id = " + id);
         try {
-            studentDao.deleteById(id);
+            personDao.deleteById(id);
         } catch (SQLException e) {
             loggerError.error("Error at method deleteById, id = " + id, e);
         }
@@ -54,7 +54,7 @@ public class PersonService {
     public void add(Person person) {
         logger.info(this.getClass().getName() + " method add started");
         try {
-            studentDao.add(person);
+            personDao.add(person);
         } catch (SQLException e) {
             loggerError.error("Error at method add", e);
         }
@@ -65,7 +65,7 @@ public class PersonService {
         logger.info(this.getClass().getName() + " method getAll started");
         List<Person> personList = new ArrayList<>();
         try {
-            personList = studentDao.getAll();
+            personList = personDao.getAll();
         } catch (SQLException e) {
             loggerError.error("Error at method getAll", e);
         }

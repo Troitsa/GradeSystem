@@ -85,7 +85,7 @@ public class PersonDaoImpl implements PersonDao {
     public void add(Person person) throws SQLException {
         logger.info("Class PersonDaoImpl method add started");
 
-        String sql = "INSERT INTO persons (name,birthday,address) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO persons (name,birthday,address) VALUES (?,?,?)";
         try (Connection connection = new ConnectionManagerImpl().getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, person.getName());
