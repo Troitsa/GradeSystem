@@ -32,7 +32,8 @@ public class PersonDaoImpl implements PersonDao {
                     resultSet.getLong("id")
                     , resultSet.getString("name")
                     , resultSet.getDate("birthday")
-                    , resultSet.getString("address"));
+                    , resultSet.getString("email")
+                    , resultSet.getInt("role"));
         }
         logger.info("Class PersonDaoImpl method getById finished, id = " + id);
         return person;
@@ -54,7 +55,8 @@ public class PersonDaoImpl implements PersonDao {
                     resultSet.getLong("id")
                     , resultSet.getString("name")
                     , resultSet.getDate("birthday")
-                    , resultSet.getString("address"));
+                    , resultSet.getString("email")
+                    , resultSet.getInt("role"));
             result = person;
         }
         return result;
@@ -75,7 +77,8 @@ public class PersonDaoImpl implements PersonDao {
                     resultSet.getLong("id")
                     , resultSet.getString("name")
                     , resultSet.getDate("birthday")
-                    , resultSet.getString("address"));
+                    , resultSet.getString("email")
+                    , resultSet.getInt("role"));
             result.add(person);
         }
         return result;
@@ -85,12 +88,13 @@ public class PersonDaoImpl implements PersonDao {
     public void add(Person person) throws SQLException {
         logger.info("Class PersonDaoImpl method add started");
 
-        String sql = "INSERT INTO persons (name,birthday,address) VALUES (?,?,?)";
+        String sql = "INSERT INTO persons (name,birthday,email,role) VALUES (?,?,?,?)";
         try (Connection connection = new ConnectionManagerImpl().getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, person.getName());
             statement.setDate(2, person.getBirthday());
-            statement.setString(3, person.getAddress());
+            statement.setString(3, person.getEmail());
+            statement.setInt(4, person.getRole());
             statement.executeUpdate();
         }
         logger.info("Class PersonDaoImpl method add finished");
@@ -100,12 +104,13 @@ public class PersonDaoImpl implements PersonDao {
     public void update(Person person) throws SQLException {
         logger.info("Class PersonDaoImpl method update started, id = " + person.getId());
 
-        String sql = "UPDATE persons SET name = ?, birthday = ?, address  = ? WHERE id = ?";
+        String sql = "UPDATE persons SET name = ?, birthday = ?, email  = ?, role  = ? WHERE id = ?";
         try (Connection connection = new ConnectionManagerImpl().getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, person.getName());
             statement.setDate(2, person.getBirthday());
-            statement.setString(3, person.getAddress());
+            statement.setString(3, person.getEmail());
+            statement.setInt(4, person.getRole());
             statement.setLong(4, person.getId());
             statement.executeUpdate();
         }

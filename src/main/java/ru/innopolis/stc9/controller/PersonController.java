@@ -41,15 +41,16 @@ public class PersonController extends HttpServlet {
                                     @RequestAttribute String action,
                                     @RequestAttribute String name,
                                     @RequestAttribute String birthday,
-                                    @RequestAttribute String address, Model model) {
+                                    @RequestAttribute String email,
+                                    @RequestAttribute String role,Model model) {
 
         if(action.equals("add")) {
-            Person person = new Person(name, Date.valueOf(birthday),address);
+            Person person = new Person(name, Date.valueOf(birthday),email);
             service.add(person);
         }
         else {
             if (action.equals("update")) {
-                Person person = new Person(Long.parseLong(id), name, Date.valueOf(birthday),address);
+                Person person = new Person(Long.parseLong(id), name, Date.valueOf(birthday),email,Integer.parseInt(role));
                 service.updateById(person);
             }
         }

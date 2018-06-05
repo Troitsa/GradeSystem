@@ -5,7 +5,8 @@
     <main class="content">
         <h1>${person.name}</h1>
         <p><b>День рождения:</b> ${person.birthday}</p>
-        <p>Адрес:</b> ${person.address}</p>
+        <p>E-mail:</b> ${person.email}</p>
+        <p>Роль:</b> ${person.role}</p>
     </main><!-- .content -->
 </div>
 <!-- .container-->
